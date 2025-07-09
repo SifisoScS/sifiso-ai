@@ -2,7 +2,10 @@ import streamlit as st
 import os
 
 # Set page config
-st.set_page_config(page_title="Community | Sifiso AI", layout="wide")
+st.set_page_config(page_title="Community | Sifiso AI", layout="wide", initial_sidebar_state="collapsed")
+
+from app import render_header
+render_header()
 
 # Custom CSS
 st.markdown("""

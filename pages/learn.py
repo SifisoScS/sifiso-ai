@@ -2,109 +2,122 @@ import streamlit as st
 import os
 
 # Set page config
-st.set_page_config(page_title="Learn | Sifiso AI", layout="wide")
+st.set_page_config(
+    page_title="Sifiso AI - Learn",
+    page_icon="🇿🇦",
+    layout="wide"
+)
 
-# Custom CSS
+# Custom CSS with learning-focused styling
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
-
-    body {
-        font-family: 'Open Sans', sans-serif;
-        color: #374151;
+    :root {
+        --sa-yellow: #FFCD00;
+        --sa-green: #007749;
+        --sa-blue: #002395;
     }
-    h1, h2, h3 {
+    
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+    
+    .course-header {
         font-family: 'Montserrat', sans-serif;
+        color: var(--sa-green);
+        border-left: 5px solid var(--sa-yellow);
+        padding-left: 1rem;
+        margin: 2rem 0 1rem;
     }
-    .header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background-color: #ffffff;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        z-index: 1000;
-        padding: 1rem 2rem;
+    
+    .language-badge {
+        background: var(--sa-blue);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+        display: inline-block;
+        margin-right: 0.5rem;
     }
-    .header a {
-        color: #374151;
-        font-weight: 600;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
-    .header a:hover {
-        color: #D97706;
-    }
-    .logo {
-        color: #D97706;
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-    .section {
-        padding: 4rem 2rem;
-        margin-top: 60px;
-    }
-    .card {
-        background-color: #ffffff;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    .module-card {
+        border-radius: 10px;
         padding: 1.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        background: #f8f9fa;
+        transition: transform 0.3s;
     }
-    .footer {
-        background-color: #D97706;
-        color: #FEF3C7;
-        padding: 1.5rem;
-        text-align: center;
+    
+    .module-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     </style>
 """, unsafe_allow_html=True)
 
-def render_header():
-    """Render the sticky header."""
-    st.markdown("""
-        <div class="header">
-            <a href="/" class="logo">Sifiso AI</a>
-            <a href="/learn">Learn</a>
-            <a href="/community">Community</a>
-            <a href="/tools">Tools</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
+# Language selector
+selected_lang = st.selectbox(
+    "🌍 Choose your language",
+    ["English", "isiZulu", "Afrikaans", "Sesotho"],
+    key="lang_selector"
+)
+
+# Main header
+st.markdown("""
+    <h1 style='color:#007749; font-family:Montserrat; text-align:center;'>
+        AI Education for South African Builders
+    </h1>
+    <p style='text-align:center; margin-bottom:2rem;'>
+        Practical skills taught in contextually relevant ways
+    </p>
+""", unsafe_allow_html=True)
+
+# Core Learning Tracks
+st.markdown('<h2 class="course-header">Foundational Tracks</h2>', unsafe_allow_html=True)
+
+# Track 1: AI Basics
+with st.expander("🤖 AI Fundamentals for Everyone", expanded=True):
+    cols = st.columns([1,3])
+    with cols[0]:
+        st.image("images/ai_basics.jpg", use_container_width=True)
+    with cols[1]:
+        st.markdown("""
+        ### Understanding Artificial Intelligence
+        - How AI works in everyday life
+        - Basic terminology explained
+        - Local applications in SA townships
+        
+        <div style="margin-top:1rem;">
+            <span class="language-badge">English</span>
+            <span class="language-badge">isiZulu</span>
+            <span class="language-badge">Afrikaans</span>
         </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+        
+        if st.button("Start This Track", key="ai_basics"):
+            st.switch_page("pages/ai_fundamentals.py")
 
-def render_footer():
-    """Render the footer."""
-    st.markdown("""
-        <div class="footer">
-            <p>© 2025 Sifiso AI. All rights reserved.</p>
-    """, unsafe_allow_html=True)
-    cols = st.columns(4)
-    socials = ["facebook.png", "twitter.png", "linkedin.png", "instagram.png"]
-    for i, social in enumerate(socials):
-        with cols[i]:
-            st.image(os.path.join("images", social), width=24)
-    st.markdown('</div>', unsafe_allow_html=True)
+# Track 2: Practical Coding
+with st.expander("💻 Python for Problem Solving"):
+    cols = st.columns([1,3])
+    with cols[0]:
+        st.image("images/python_coding.jpg", use_container_width=True)
+    with cols[1]:
+        st.markdown("""
+        ### Coding Skills for Local Challenges
+        - Automating township business tasks
+        - Analyzing local economic data
+        - Building simple AI models
+        
+        <div style="margin-top:1rem;">
+            <span class="language-badge">English</span>
+            <span class="language-badge">isiXhosa</span>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        if st.button("Start This Track", key="python_coding"):
+            st.switch_page("pages/python_basics.py")
 
-# Render header
-render_header()
-
-# Learn Section
-st.markdown('<div class="section" id="learn">', unsafe_allow_html=True)
-st.header("Learn AI in Your Language", anchor=False)
-cols = st.columns(3)
-articles = [
-    {"title": "Mdantsane AI Classroom", "desc": "Interactive AI lessons tailored for the Mdantsane community, focusing on practical skills and local language support.", "image": "mdantsane.jpg"},
-    {"title": "eThekwini AI Workshop", "desc": "Hands-on AI workshops in eThekwini designed to empower learners with coding and machine learning skills.", "image": "ethekwini.jpg"},
-    {"title": "Soweto AI Community Meetup", "desc": "Monthly meetups in Soweto to share AI knowledge, collaborate on projects, and build a supportive network.", "image": "soweto.jpg"}
-]
-for i, article in enumerate(articles):
-    with cols[i]:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.image(os.path.join("images", article["image"]), use_container_width=True)
-        st.subheader(article["title"], anchor=False)
-        st.write(article["desc"])
-        st.markdown('</div>', unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Render footer
-render_footer()
+# Footer
+st.markdown("""
+<div style="margin-top:3rem; padding:1.5rem; background:#00774920; border-radius:8px; text-align:center;">
+    <p>Need help choosing a learning path? <a href="/contact" style="color:#007749; font-weight:bold;">Contact our education advisors</a></p>
+</div>
+""", unsafe_allow_html=True)
