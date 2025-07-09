@@ -1,157 +1,133 @@
 import streamlit as st
 import os
 
-# Set page config
-st.set_page_config(page_title="Sifiso AI | Learn AI in Your Language", layout="wide")
+# Set page config with SA flag icon
+st.set_page_config(
+    page_title="Sifiso AI - Start Your Journey",
+    page_icon="🇿🇦",
+    layout="wide"
+)
 
-# Custom CSS for Tailwind-like styling
+# Custom CSS with SA design elements
 st.markdown("""
     <style>
-    /* Font imports */
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
-
-    body {
-        font-family: 'Open Sans', sans-serif;
-        color: #374151; /* text-gray-800 */
+    :root {
+        --sa-yellow: #FFCD00;
+        --sa-green: #007749;
+        --sa-red: #DE3831;
+        --sa-blue: #002395;
+        --sa-black: #000000;
     }
-    h1, h2, h3 {
+    
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+    
+    .main-title {
         font-family: 'Montserrat', sans-serif;
-    }
-    /* Sticky header */
-    .header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background-color: #ffffff; /* bg-white */
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* shadow */
-        z-index: 1000;
-        padding: 1rem 2rem;
-    }
-    .header a {
-        color: #374151; /* text-gray-700 */
-        font-weight: 600;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
-    .header a:hover {
-        color: #D97706; /* hover:text-yellow-600 */
-    }
-    .logo {
-        color: #D97706; /* text-yellow-600 */
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-    /* Section styling */
-    .section {
-        padding: 4rem 2rem;
-    }
-    .hero {
-        background: linear-gradient(to bottom right, #F59E0B, #D97706, #F97316); /* from-amber-400 to-orange-500 */
-        color: white;
+        color: var(--sa-green);
         text-align: center;
-        padding: 4rem 2rem;
-        margin-top: 60px; /* Offset for fixed header */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 50vh;
-    }
-    .hero-content {
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    .hero h1 {
-        font-size: 3rem;
-        font-weight: 600;
-        margin-bottom: 1.5rem;
-    }
-    .hero h2 {
-        font-size: 1.5rem;
-        font-weight: 400;
-        margin-bottom: 1rem;
-    }
-    .hero p {
-        font-size: 1.125rem;
         margin-bottom: 2rem;
+        font-size: 2.5rem;
     }
-    .hero button {
-        background-color: #ffffff; /* bg-white */
-        color: #D97706; /* text-yellow-700 */
-        font-weight: 600;
-        padding: 0.75rem 1.5rem;
-        border-radius: 1.5rem;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .hero button:hover {
-        background-color: #FEF3C7; /* hover:bg-yellow-100 */
-    }
-    .footer {
-        background-color: #D97706; /* bg-yellow-600 */
-        color: #FEF3C7; /* text-yellow-100 */
+    
+    .pathway-card {
+        border-radius: 15px;
         padding: 1.5rem;
-        text-align: center;
+        height: 100%;
+        transition: transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border: 1px solid #eee;
+    }
+    
+    .pathway-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .card-title {
+        color: var(--sa-blue);
+        font-weight: 700;
+        margin: 1rem 0 0.5rem;
+    }
+    
+    .card-button {
+        background: var(--sa-green) !important;
+        color: white !important;
+        border: none !important;
+    }
+    
+    .card-button:hover {
+        background: var(--sa-yellow) !important;
+        color: var(--sa-black) !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-def render_header():
-    """Render the sticky header for all pages."""
-    st.markdown("""
-        <div class="header">
-            <a href="/" class="logo">Sifiso AI</a>
-            <a href="/learn">Learn</a>
-            <a href="/community">Community</a>
-            <a href="/tools">Tools</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-        </div>
-    """, unsafe_allow_html=True)
-
-def render_footer():
-    """Render the footer for all pages."""
-    st.markdown("""
-        <div class="footer">
-            <p>© 2025 Sifiso AI. All rights reserved.</p>
-    """, unsafe_allow_html=True)
-    cols = st.columns(4)
-    socials = ["facebook.png", "twitter.png", "linkedin.png", "instagram.png"]
-    for i, social in enumerate(socials):
-        with cols[i]:
-            st.image(os.path.join("images", social), width=24)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# Render header
-render_header()
-
-# Hero Section
+# Main content
+st.markdown('<h1 class="main-title">Kickstart Your AI Journey</h1>', unsafe_allow_html=True)
 st.markdown("""
-    <div class="hero" id="hero">
-        <div class="hero-content">
-            <h1>Welcome to Sifiso AI</h1>
-            <h2>Desire to Learn, Power to Build</h2>
-            <p>Learn AI and digital skills in your language: From Mdantsane to eThekwini & from eThekwini to Soweto. Unlock your potential with community-powered AI tutoring and startup tools.</p>
-            <button id="get-started-btn">Get Started</button>
-        </div>
+    <p style='text-align:center; font-size:1.1rem; margin-bottom:3rem;'>
+    Choose your pathway to AI mastery, tailored for South African builders
+    </p>
+""", unsafe_allow_html=True)
+
+# Pathway cards
+cols = st.columns(3)
+pathways = [
+    {
+        "title": "Learn AI",
+        "icon": "📚",
+        "desc": "Courses in your language from township classrooms to online",
+        "image": "learn_path.jpg",
+        "action": "Start Learning",
+        "target": "learn.py"
+    },
+    {
+        "title": "Join Community",
+        "icon": "👥",
+        "desc": "Connect with mentors and peers in your area",
+        "image": "community_path.jpg",
+        "action": "Find Your Tribe",
+        "target": "community.py"
+    },
+    {
+        "title": "Build Solutions",
+        "icon": "🛠️",
+        "desc": "Tools for SA-specific AI projects",
+        "image": "tools_path.jpg",
+        "action": "Start Building",
+        "target": "tools.py"
+    }
+]
+
+for i, pathway in enumerate(pathways):
+    with cols[i]:
+        # Card container
+        st.markdown(f"""
+            <div class="pathway-card">
+                <div style="text-align:center;">
+                    <img src="{os.path.join('images', pathway['image'])}" 
+                         style="width:100%; border-radius:10px; height:180px; object-fit:cover;">
+                    <h3 class="card-title">{pathway['icon']} {pathway['title']}</h3>
+                    <p>{pathway['desc']}</p>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        # Centered button
+        st.markdown("""
+            <div style="display:flex; justify-content:center; margin-top:1rem;">
+        """, unsafe_allow_html=True)
+        
+        if st.button(pathway['action'], key=f"btn_{i}"):
+            # Revert to using full relative path for st.switch_page
+            st.switch_page(f"pages/{pathway['target']}")
+        
+        st.markdown("</div>", unsafe_allow_html=True)
+
+# Footer
+st.markdown("""
+    <div style="margin-top:4rem; padding:2rem; background:#007749; color:white; text-align:center; border-radius:8px;">
+        <h3>Need help choosing?</h3>
+        <p>Our team is ready to guide you on your AI journey</p>
     </div>
 """, unsafe_allow_html=True)
-
-# Handle Get Started button click
-if st.session_state.get("get_started_clicked", False):
-    st.switch_page("./pages/get_started.py")
-
-# JavaScript to set session state on button click
-st.markdown("""
-    <script>
-    document.getElementById("get-started-btn").addEventListener("click", function() {
-        fetch("/?get_started_clicked=true", {method: "POST"}).then(() => {
-            window.location.href = "/get_started";
-        });
-    });
-    </script>
-""", unsafe_allow_html=True)
-
-# Render footer
-render_footer()
